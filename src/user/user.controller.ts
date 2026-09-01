@@ -1,5 +1,6 @@
-import { Controller, Get, Param, } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param, } from '@nestjs/common';
 import { UserService } from './user.service';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Controller('user')
 export class UserController {
@@ -16,7 +17,12 @@ export class UserController {
     @Get(":id")
     getUser(@Param('id') id: String){
         // const userService = new UserService();
+
+        try{
         return this.userService.getUser(+id);
+        }catch (error){
+            throw new NotFoundException(error.message);
+        }
     }
 
 
