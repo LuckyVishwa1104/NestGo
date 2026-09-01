@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
 
   // mock user list
-  private user = [
+  private users = [
     {
       id: 1,
       name: 'Lucky',
@@ -19,12 +20,12 @@ export class UserService {
 
   // return all users
   getAllUser() {
-    return this.user;
+    return this.users;
   }
 
   // return specific user
   getUser(id: number) {
-    const user = this.user.find((user) => user.id === id);
+    const user = this.users.find((user) => user.id === id);
 
     if(!user){
       throw new Error("User not found!");
@@ -34,6 +35,16 @@ export class UserService {
   }
 
   // add a new use to the list 
-  // @Post
+  addUser(user: UserDto){
+    const id = Date.now();
+    this.users.push({
+      id,
+      ...user,
+    }
+    )
+
+    return this.getUser(id);
+
+  }
 
 }
