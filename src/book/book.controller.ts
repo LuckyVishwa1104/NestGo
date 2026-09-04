@@ -37,7 +37,7 @@ export class BookController {
 
   // add new book
   @Post()
-  addBook(@Body(new ValidationPipe()) book: BookDto) {
+  addBook(@Body(new ValidationPipe({transform : true})) book: BookDto) {
     return this.bookService.addBook(book);
   }
 }
