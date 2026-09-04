@@ -4,6 +4,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  ParseIntPipe,
   Post,
 } from '@nestjs/common';
 import { BookService } from './book.service';
@@ -21,9 +22,11 @@ export class BookController {
 
   // get book
   @Get(':id')
-  getBook(@Param('id') id: string) {
+
+  // Pipe - used to transform and validate param data
+  getBook(@Param('id', ParseIntPipe) id: number) {
     try {
-      return this.bookService.getBook(+id);
+      return this.bookService.getBook(id);
     } catch (error) {
       throw new NotFoundException(error.message);
     }

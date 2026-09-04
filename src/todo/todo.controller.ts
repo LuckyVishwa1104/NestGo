@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoDto } from './dto/todo.dto';
 
@@ -16,7 +16,7 @@ export class TodoController {
 
   // get specific todo
   @Get(":id")
-  getTodo(@Param('id') id: string){
+  getTodo(@Param('id', ParseIntPipe) id: number){
 
     try{
       return this.todoService.getTodo(+id);

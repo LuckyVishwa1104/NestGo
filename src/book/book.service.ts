@@ -11,7 +11,7 @@ export class BookService {
       author: 'David Gogging',
     },
     {
-      id: 1,
+      id: 2,
       title: 'Metamorphosis',
       author: 'Franz Kafka',
     },

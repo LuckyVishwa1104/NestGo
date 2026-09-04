@@ -1,4 +1,4 @@
-import { Controller, Get, Post, NotFoundException, Param, Body, } from '@nestjs/common';
+import { Controller, Get, Post, NotFoundException, Param, Body, ParseIntPipe, } from '@nestjs/common';
 import { UserService } from './user.service';
 import { errorContext } from 'rxjs/internal/util/errorContext';
 import { UserDto } from './dto/user.dto';
@@ -16,7 +16,7 @@ export class UserController {
     }
 
     @Get(":id")
-    getUser(@Param('id') id: String){
+    getUser(@Param('id', ParseIntPipe) id: number){
         // const userService = new UserService();
 
         try{
