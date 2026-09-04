@@ -6,9 +6,11 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { BookDto } from './dto/book.dto';
+import { truncate } from 'fs';
 
 @Controller('book')
 export class BookController {
@@ -24,6 +26,7 @@ export class BookController {
   @Get(':id')
 
   // Pipe - used to transform and validate param data
+  // for validator we need to dev dependency - class-validator and class-transformer
   getBook(@Param('id', ParseIntPipe) id: number) {
     try {
       return this.bookService.getBook(id);
@@ -34,7 +37,7 @@ export class BookController {
 
   // add new book
   @Post()
-  addBook(@Body() book: BookDto) {
+  addBook(@Body(new ValidationPipe()) book: BookDto) {
     return this.bookService.addBook(book);
   }
 }
