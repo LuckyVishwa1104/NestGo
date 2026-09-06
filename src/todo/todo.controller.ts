@@ -1,6 +1,7 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { TodoDto } from './dto/todo.dto';
+import { TodoStatusGuard } from './guards/todo-status/todo-status.guard';
 
 @Controller('todo')
 export class TodoController {
@@ -28,7 +29,9 @@ export class TodoController {
   }
 
   // add todo
+  // guard - pipe - controller - service
   @Post()
+  @UseGuards(TodoStatusGuard)
   addTodo(@Body() todo: TodoDto){
     return this.todoService.addTodo(todo);  
   }

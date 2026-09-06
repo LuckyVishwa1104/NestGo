@@ -2,10 +2,11 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class TodoGuard implements CanActivate {
+export class TodoStatusGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    return true;
+  ): boolean {
+    const req = context.switchToHttp().getRequest();
+    return req.body.status === 'pending';
   }
 }
