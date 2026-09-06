@@ -10,4 +10,7 @@ export class TodoDto {
 
     @IsString()
     status: string;
+
+    @IsString()
+    userId: string
 }

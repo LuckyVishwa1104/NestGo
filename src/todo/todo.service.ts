@@ -8,11 +8,13 @@ export class TodoService {
       id: 1,
       title: 'Todo 1',
       body: 'Body for Todo1',
+      userId: '1'
     },
     {
       id: 2,
       title: 'Todo 2',
       body: 'Body for Todo2',
+      userId: '1'
     },
   ];
 
@@ -36,6 +38,7 @@ export class TodoService {
     this.todos.push({
       id,
       ...todo,
+      userId: '1'
     });
 
     return this.getTodo(id);
