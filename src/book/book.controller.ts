@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { BookDto } from './dto/book.dto';
-import { truncate } from 'fs';
 import { FirewallGuard } from 'src/firewall/firewall.guard';
 
 @Controller('book')
@@ -28,7 +27,7 @@ export class BookController {
   // get book
   @Get(':id')
   // Pipe - used to transform and validate param data
-  // for validator we need to dev dependency - class-validator and class-transformer
+  // for validator we need two dev dependency - class-validator and class-transformer
   getBook(@Param('id', ParseIntPipe) id: number) {
     try {
       return this.bookService.getBook(id);
