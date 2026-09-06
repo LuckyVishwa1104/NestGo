@@ -8,6 +8,7 @@ export class TodoController {
   // dependecy injection of todo service
   constructor(private readonly todoService: TodoService) {}
 
+  // pipe - controller - service
   // get all todo
   @Get()
   getAllTodo(){
@@ -15,9 +16,9 @@ export class TodoController {
   }
 
   // get specific todo
+  // pipe - used to validate and transfor request parameter data
   @Get(":id")
   getTodo(@Param('id', ParseIntPipe) id: number){
-
     try{
       return this.todoService.getTodo(+id);
     }
@@ -31,4 +32,5 @@ export class TodoController {
   addTodo(@Body() todo: TodoDto){
     return this.todoService.addTodo(todo);  
   }
+
 }
