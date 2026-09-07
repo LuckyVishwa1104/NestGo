@@ -15,20 +15,19 @@ import { TodoOwnerGuard } from './guards/todo.owner/todo.owner.guard';
 
 @Controller('todo')
 export class TodoController {
-  
+
   // dependecy injection of todo service
   constructor(private readonly todoService: TodoService) {}
 
   // pipe - controller - service
   // get all todo
   @Get()
-  @UseGuards(TodoOwnerGuard)
   getAllTodo() {
     return this.todoService.getAllTodo();
   }
 
   // get specific todo
-  // pipe - used to validate and transfor request parameter data
+  // pipe - used to validate and transform request parameter data
   @Get(':id')
   @UseGuards(TodoOwnerGuard)
   getTodo(@Param('id', ParseIntPipe) id: number) {
@@ -46,4 +45,5 @@ export class TodoController {
   addTodo(@Body() todo: TodoDto) {
     return this.todoService.addTodo(todo);
   }
+  
 }
